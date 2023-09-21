@@ -46,8 +46,8 @@ app.use(limiter)
 
 // these are defining the routes
 app.use('/user', user)
-app.use('/board', board)
-app.use('/card', card)
+// app.use('/board', board)
+// app.use('/card', card)
 
 app.use('/test', test)
 

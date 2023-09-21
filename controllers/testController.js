@@ -1,10 +1,10 @@
 const { sql, sequelize } = require('../config/db')
-const { User, Site, Post, Comment, Vote } = require('../models/associationsIndex')
+const { User, Board, Card } = require('../models/associationsIndex')
 
 const getTest = async (req, res, next) => {
     try {
         const example = await sql`
-            SELECT * FROM xx
+            SELECT * FROM users
         `
         console.log("test controller hit!")
         res
@@ -30,11 +30,12 @@ const getTest = async (req, res, next) => {
 const syncDBtables = async (req, res, next) => {
     try {
         // this (alter: true) should be avoided in production
+        /* 
+        //comment the below out for DB safety (can delete tables)
         await User.sync({alter: true}) 
-        await Site.sync({alter: true})
-        await Post.sync({alter: true})
-        await Comment.sync({alter: true})
-        await Vote.sync({alter: true})
+        await Board.sync({alter: true})
+        await Card.sync({alter: true})
+        */
         
         console.log("All tables should be created")
         res
