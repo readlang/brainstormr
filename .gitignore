@@ -1,6 +1,9 @@
+# folders to ignore
 /node_modules
+/.vscode
+
+# config secrets
 config/config.env
 
-.vscode/settings.json
-
+# development notes
 z-notes.md

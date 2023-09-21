@@ -5,7 +5,7 @@ const cors = require('cors')
 const logger = require('./middlewares/logger')
 const errorHandler = require('./middlewares/error')
 const cookieParser = require('cookie-parser')
-const fileupload = require('express-fileupload')
+// const fileupload = require('express-fileupload')
 const rateLimit = require('express-rate-limit')
 const helmet = require('helmet')
 const hpp = require('hpp')
@@ -28,7 +28,7 @@ app.use(cors({
 
 // middleware to use for all routes go here:
 app.use(cookieParser())
-app.use(fileupload()) // allows grabbing data out of uploaded files
+// app.use(fileupload()) // allows grabbing data out of uploaded files
 app.use(xss()) // sanitizes user input in post body, get queries, url params
 app.use(hpp())
 app.use(helmet({
