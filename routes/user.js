@@ -43,6 +43,7 @@ router.route('/:userId')
     .put(protectedRoute, updateUser)
     .delete(protectedRoute, deleteUser)
 
+// route "/user/:userId/boards"
 router.route('/:userId/boards')
     .get(protectedRoute, getBoardsForUser)
 

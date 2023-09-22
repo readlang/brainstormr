@@ -9,6 +9,7 @@ const BoardModel = sequelize.define('Board', {
     }, 
     uuid: {
         type: DataTypes.UUID,
+        allowNull: false,
         defaultValue: DataTypes.UUIDV4
     },
     public: {

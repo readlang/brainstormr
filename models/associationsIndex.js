@@ -8,10 +8,20 @@ const Card = CardModel
 
 // ASSOCIATIONS between models
 
-User.hasMany(Board);
-Board.belongsTo(User);
+User.hasMany(Board, {
+    foreignKey: {
+        allowNull: false
+    },
+    onDelete: 'RESTRICT'
+});
+Board.belongsTo(User); 
 
-Board.hasMany(Card);
+Board.hasMany(Card, {
+    foreignKey: {
+        allowNull: false
+    },
+    onDelete: 'RESTRICT',
+});
 Card.belongsTo(Board);
 
 module.exports = {
