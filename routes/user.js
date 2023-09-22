@@ -14,6 +14,10 @@ const {
     deleteUser,
 } = require('../controllers/userController')
 
+const {
+    getBoardsForUser
+} = require('../controllers/boardController')
+
 const adminValidator = require('../middlewares/utils/validators')
 const protectedRoute = require('../middlewares/auth')
 
@@ -38,5 +42,8 @@ router.route('/:userId')
     .get(protectedRoute, getUser)
     .put(protectedRoute, updateUser)
     .delete(protectedRoute, deleteUser)
+
+router.route('/:userId/boards')
+    .get(protectedRoute, getBoardsForUser)
 
 module.exports = router

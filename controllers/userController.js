@@ -165,6 +165,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     userInfo.id = user.id
     userInfo.username = user.userName
     if (user.email) userInfo.email = user.email
+    userInfo.admin = user.admin
 
     const options ={
         expires: new Date( Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000 ),
