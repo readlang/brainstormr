@@ -108,10 +108,10 @@ const logout = async (req, res, next) => {
     }
 }
 
-// get a single user - authenticate first ////////////////////////// why is this showing info about other users?
+// get a single user - authenticate first 
 const getUser = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.params.userId)
+        const user = await User.findByPk(req.user.id)
         res
         .status(200)
         .setHeader('Content-Type', 'application/json')
@@ -121,10 +121,10 @@ const getUser = async (req, res, next) => {
     }
 }
 
-// update user info - authenticate first /////////////////////////// why is this updating info about other users?
+// update user info - authenticate first 
 const updateUser = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.params.userId)
+        const user = await User.findByPk(req.user.id)
 
         if (req.body.userName) user.userName = req.body.userName
         if (req.body.email) user.email = req.body.email
@@ -141,11 +141,11 @@ const updateUser = async (req, res, next) => {
     }
 }
 
-// delete a single user - auth first ///////////////////////////////// why is this deleting another user?
+// delete a single user - auth first 
 const deleteUser = async (req, res, next) => {
     try {
         const result = await User.destroy({
-            where: { id: req.params.userId }
+            where: { id: req.user.id  }
         })
         res
         .status(200)
@@ -199,16 +199,3 @@ module.exports = {
     updateUser,
     deleteUser,
 }
-
-
-/*
-CRUD
-
-// increment / decrement
-const jane = await User.create({ name: "Jane", age: 100 });
-const incrementResult = await jane.increment('age', { by: 2 });
-// Note: to increment by 1 you can omit the `by` option and just do `user.increment('age')`
-// In PostgreSQL, `incrementResult` will be the updated user, unless the option
-// `{ returning: false }` was set (and then it will be undefined).
-
-*/

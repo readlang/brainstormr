@@ -59,12 +59,10 @@ const deleteBoard = async (req, res, next) => {
 }
 
 
-const getBoardsForUser = async (req, res, next) => {
+const getMyBoards = async (req, res, next) => {
     try {
         const boards = await Board.findAll({
-            where: {
-                UserId: req.params.userId // attribute: UserId (database) param: userId (routes file)
-            }
+            where: { UserId: req.user.id }
         })
         res
         .status(200)
@@ -80,5 +78,5 @@ module.exports = {
     postBoard,
     updateBoard,
     deleteBoard,
-    getBoardsForUser
+    getMyBoards
 }

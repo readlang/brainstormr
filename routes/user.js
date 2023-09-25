@@ -14,10 +14,6 @@ const {
     deleteUser,
 } = require('../controllers/userController')
 
-const {
-    getBoardsForUser
-} = require('../controllers/boardController')
-
 const adminValidator = require('../middlewares/utils/validators')
 const protectedRoute = require('../middlewares/auth')
 
@@ -38,13 +34,10 @@ router.route('/updatePassword')
 router.route('/logout')
     .get(protectedRoute, logout)
 
-router.route('/:userId')
+// route: /user/me
+router.route('/me')
     .get(protectedRoute, getUser)
     .put(protectedRoute, updateUser)
     .delete(protectedRoute, deleteUser)
-
-// route "/user/:userId/boards"
-router.route('/:userId/boards')
-    .get(protectedRoute, getBoardsForUser)
 
 module.exports = router

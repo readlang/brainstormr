@@ -4,6 +4,8 @@ const {
     getBoards,
     postBoard,
 
+    getMyBoards,
+
     updateBoard,
     deleteBoard,
 } = require('../controllers/boardController')
@@ -19,6 +21,10 @@ const protectedRoute = require('../middlewares/auth')
 router.route('/')
     .get(protectedRoute, adminValidator, getBoards) // admin only route
     .post(protectedRoute, postBoard)
+
+// /board/myboards
+router.route('/myboards')
+    .get(protectedRoute, getMyBoards)
 
 router.route('/:boardId')
     .put(protectedRoute, updateBoard)
