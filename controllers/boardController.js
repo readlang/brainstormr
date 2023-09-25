@@ -16,7 +16,6 @@ const getBoards = async (req, res, next) => {
 const postBoard = async (req, res, next) => {
     try {
         if (!req.body.name) throw new Error("Please provide a board name")
-
         const board = await Board.create({ 
             UserId: req.user.id,
             name: req.body.name
@@ -32,7 +31,17 @@ const postBoard = async (req, res, next) => {
 
 const updateBoard = async (req, res, next) => {
     try {
-        console.log(req.body)
+        const board = await Board.findByPk(req.params.boardId)
+        if (board.UserId !== req.user.id) {
+            throw new Error("Can't modify board you don't own.")
+        }
+        if (req.body.name) board.name = req.body.name
+        if (req.body.public) board.public = req.body.public
+        const result = await board.save()
+        res
+        .status(200)
+        .setHeader('Content-Type', 'application/json')
+        .json(result)
     } catch (error) {
         next(error)
     }
@@ -41,7 +50,6 @@ const updateBoard = async (req, res, next) => {
 const deleteBoard = async (req, res, next) => {
     try {
         const result = await Board.findByPk(req.params.boardId)
-
         if (result.UserId === req.user.id) {
             result.destroy() 
         } else {
@@ -57,7 +65,6 @@ const deleteBoard = async (req, res, next) => {
         next(error)
     }
 }
-
 
 const getMyBoards = async (req, res, next) => {
     try {
