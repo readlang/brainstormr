@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db')
 
 const CardModel = sequelize.define('Card', {
+    //BoardId : int
     content: {
         type: DataTypes.TEXT,
         defaultValue: ""

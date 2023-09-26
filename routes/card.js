@@ -3,7 +3,7 @@ const router = express.Router();
 const {
     getCards,
     postCard,
-    
+    getCard,
     updateCard,
     deleteCard,
 } = require('../controllers/cardController')
@@ -17,6 +17,7 @@ router.route('/')
     .post(protectedRoute, postCard)
 
 router.route('/:cardId')
+    .get(protectedRoute, getCard)
     .put(protectedRoute, updateCard)
     .delete(protectedRoute, deleteCard)
 

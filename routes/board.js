@@ -30,7 +30,7 @@ router.route('/:boardId')
     .put(protectedRoute, updateBoard)
     .delete(protectedRoute, deleteBoard)
 
-// router.route('/:boardId/cards')
-//     .get(protectedRoute, getCardsForBoard)
+router.route('/:boardId/cards')
+    .get(protectedRoute, getCardsForBoard)
 
 module.exports = router

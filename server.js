@@ -14,7 +14,7 @@ const xss = require('xss-clean')
 // imports the various routes of the server
 const user = require('./routes/user')
 const board = require('./routes/board')
-// const card = require('./routes/card')
+const card = require('./routes/card')
 
 const test = require('./routes/test')
 
@@ -47,7 +47,7 @@ app.use(limiter)
 // these are defining the routes
 app.use('/user', user)
 app.use('/board', board)
-// app.use('/card', card)
+app.use('/card', card)
 
 app.use('/test', test)
 
