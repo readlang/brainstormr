@@ -2,7 +2,7 @@
 
 const errorHandler = (err, req, res, next) => {
     console.log("-- Source: errorHandler --");
-    //console.log(err.stack.split("\n", 2).join(" -"));
+    // console.log(err.errors);
     console.log(err)
 
     res
@@ -10,7 +10,8 @@ const errorHandler = (err, req, res, next) => {
     .setHeader('Content-Type', 'application/json')
     .json({
         success: false,
-        error: err.message || 'Server Error'
+        error: err.message || 'Server Error',
+        details: err.name || "Details unknown" 
     });
 };
 

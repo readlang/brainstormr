@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 // get all users - admin only route, auth first
+// working
 const getUsers = async (req, res, next) => {
     try {
         const users = await User.findAll()
@@ -16,6 +17,7 @@ const getUsers = async (req, res, next) => {
 }
 
 // create a new user (sign up) - no auth
+// working
 const postUser = async (req, res, next) => {
     try {
         const user = User.build(req.body)
@@ -29,6 +31,7 @@ const postUser = async (req, res, next) => {
 }
 
 // login - no auth
+// working
 const login = async (req, res, next) => {
     try {
         // console.log(req.headers)
@@ -76,6 +79,7 @@ const authenticate = async (req, res, next) => {
 }
 
 // update password - authenticate first
+// working
 const updatePassword = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.user.id)
@@ -93,6 +97,7 @@ const updatePassword = async (req, res, next) => {
 }
 
 // logout - authenticate first
+// working
 const logout = async (req, res, next) => {
     try {
         res.cookie('token', 'none', {
@@ -109,6 +114,7 @@ const logout = async (req, res, next) => {
 }
 
 // get a single user - authenticate first 
+// working
 const getUser = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.user.id)
@@ -122,6 +128,7 @@ const getUser = async (req, res, next) => {
 }
 
 // update user info - authenticate first 
+// working
 const updateUser = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.user.id)
@@ -142,16 +149,18 @@ const updateUser = async (req, res, next) => {
 }
 
 // delete a single user - auth first 
+// working
 const deleteUser = async (req, res, next) => {
     try {
         const result = await User.destroy({
-            where: { id: req.user.id  }
+            where: { id: req.user.id }
         })
         res
         .status(200)
         .setHeader('Content-Type', 'application/json')
         .json({
-            deletedItems: result
+            deletedItems: result,
+            deletedUser: req.user
         })
     } catch (error) {
         next(error)

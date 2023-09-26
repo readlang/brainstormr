@@ -4,7 +4,7 @@
 const adminValidator = async (req, res, next) => {
     // req.user will be undefined unless protectedRoute is first
 
-    if (req.user.admin) {
+    if (req.user && req.user.admin) {
         next()
     } else {
         res
