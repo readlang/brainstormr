@@ -1,6 +1,7 @@
 const { Board } = require('../models/associationsIndex')
 
 // get all boards, - admin only route, auth first
+// working
 const getBoards = async (req, res, next) => {
     try {
         const boards = await Board.findAll()
@@ -13,6 +14,7 @@ const getBoards = async (req, res, next) => {
     }
 }
 
+// working
 const postBoard = async (req, res, next) => {
     try {
         if (!req.body.name) throw new Error("Please provide a board name")
@@ -29,10 +31,11 @@ const postBoard = async (req, res, next) => {
     }
 }
 
+// working
 const updateBoard = async (req, res, next) => {
     try {
         const board = await Board.findByPk(req.params.boardId)
-        if (board.UserId !== req.user.id) {
+        if (board.UserId !== req.user.id && !req.user.admin) {
             throw new Error("Can't modify board you don't own.")
         }
         if (req.body.name) board.name = req.body.name
@@ -66,6 +69,7 @@ const deleteBoard = async (req, res, next) => {
     }
 }
 
+// working
 const getMyBoards = async (req, res, next) => {
     try {
         const boards = await Board.findAll({
