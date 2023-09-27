@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const dotenv = require('dotenv');
+require('dotenv').config({ path: './config.env' })
 const cors = require('cors')
 const logger = require('./middlewares/logger')
 const errorHandler = require('./middlewares/error')
@@ -15,7 +15,6 @@ const xss = require('xss-clean')
 const user = require('./routes/user')
 const board = require('./routes/board')
 const card = require('./routes/card')
-
 const test = require('./routes/test')
 
 const app = express();
@@ -48,11 +47,9 @@ app.use(limiter)
 app.use('/user', user)
 app.use('/board', board)
 app.use('/card', card)
-
 app.use('/test', test)
 
 const PORT = process.env.PORT || 5001
-
 const server = app.listen(PORT, () => {
     console.log(`Server is listening on PORT: ${PORT}`)
 })

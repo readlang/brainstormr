@@ -4,6 +4,7 @@
 
 # config secrets
 config/config.env
+config.env
 
 # development notes
 z-notes.md

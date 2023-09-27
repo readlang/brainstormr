@@ -2,7 +2,7 @@
 
 // import environment variables
 const dotenv = require('dotenv')
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: './config.env' });
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
 // set up sql connection
