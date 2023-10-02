@@ -13,7 +13,7 @@ const UserModel = sequelize.define('User', {
     },
     email: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: false
     },
     password: {
         type: DataTypes.TEXT,
@@ -23,6 +23,11 @@ const UserModel = sequelize.define('User', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
     }
 }, {
     // Other model options go here

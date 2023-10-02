@@ -18,6 +18,11 @@ const CardModel = sequelize.define('Card', {
     size: {
         type: DataTypes.TEXT,
         defaultValue: "300x300"
+    },
+    uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
     }
 }, {
     // Other model options go here

@@ -9,4 +9,11 @@ config.env
 # development notes
 z-notes.md
 
+# testing file
 testing.http
+
+
+# related to sequelize Migrations
+config/config.json
+/seeders
+models/index.js
