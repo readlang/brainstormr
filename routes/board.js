@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getBoards,
+    getBoards,  // site administration only
     postBoard,
 
     getMyBoards,
 
+    getBoard,
     updateBoard,
     deleteBoard,
 } = require('../controllers/boardController')
@@ -27,6 +28,7 @@ router.route('/myboards')
     .get(protectedRoute, getMyBoards)
 
 router.route('/:boardId')
+    .get(protectedRoute, getBoard)
     .put(protectedRoute, updateBoard)
     .delete(protectedRoute, deleteBoard)
 

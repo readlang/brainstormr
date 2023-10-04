@@ -31,6 +31,34 @@ const postBoard = async (req, res, next) => {
     }
 }
 
+// this uses UUID rather than the PK id
+const getBoard = async (req, res, next) => {
+    try {
+        const board = await Board.findOne({
+            where: {uuid: req.params.boardId}
+        })
+        if (board === null) {
+            res
+            .status(400)
+            .setHeader('Content-Type', 'application/json')
+            .json( {
+                error: 'Board not found',
+                details: "check path & board id"
+            } )
+        } else {
+            if (board.public === false && board.UserId !== req.user.id) {
+                throw new Error("You don't have permission to access this board")
+            }
+            res
+            .status(200)
+            .setHeader('Content-Type', 'application/json')
+            .json(board)
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
 // working
 const updateBoard = async (req, res, next) => {
     try {
@@ -87,6 +115,7 @@ const getMyBoards = async (req, res, next) => {
 module.exports = {
     getBoards,
     postBoard,
+    getBoard,
     updateBoard,
     deleteBoard,
     getMyBoards
