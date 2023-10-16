@@ -14,9 +14,11 @@ const getCards = async (req, res, next) => {
 
 const postCard = async (req, res, next) => {
     try {
-        if (!req.body.boardId) throw new Error("Provide a boardId")
+        if (!req.body.boardUuid) throw new Error("Provide a boardUuid")
+        const board = await Board.findOne({ where: {uuid: req.body.boardUuid}})
+
         const card = Card.build({
-            BoardId: req.body.boardId // DB value is BoardId, js is boardId
+            BoardId: board.id // DB value is BoardId, js is boardId
         })
         if (req.body.content) card.content = req.body.content
         if (req.body.color) card.color = req.body.color
@@ -37,7 +39,7 @@ const getCard = async (req, res, next) => {
     try {
         const card = await Card.findOne({
             where: { 
-                id: req.params.cardId
+                uuid: req.params.cardUuid
             },
             include: Board
         })
@@ -57,7 +59,7 @@ const updateCard = async (req, res, next) => {
     try {
         const card = await Card.findOne({
             where: {
-                id: req.params.cardId
+                uuid: req.params.cardUuid
             },
             include: Board
         })
@@ -82,7 +84,7 @@ const deleteCard = async (req, res, next) => {  //////////////////////// this ne
     try {
         const card = await Card.findOne({
             where: {
-                id: req.params.cardId
+                uuid: req.params.cardUuid
             },
             include: Board
         })
@@ -101,11 +103,12 @@ const deleteCard = async (req, res, next) => {  //////////////////////// this ne
     }
 }
 
+// this uses UUID rather than the PK id
 const getCardsForBoard = async (req, res, next) => {
     try {
         const board = await Board.findOne({
             where: {
-                id: req.params.boardId
+                uuid: req.params.boardId
             },
             include: Card
         })
@@ -113,10 +116,11 @@ const getCardsForBoard = async (req, res, next) => {
             throw new Error("Can't query boards you don't own")
         }
         console.log( board.toJSON().Cards ) // this outputs an array of Card objects
+        console.log( board.toJSON() ) // this outputs the board obj w/ cards attached
         res
         .status(200)
         .setHeader('Content-Type', 'application/json')
-        .json( board.toJSON().Cards )
+        .json( board.toJSON() )
     } catch (error) {
         next(error)
     }

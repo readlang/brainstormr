@@ -10,6 +10,7 @@ config.env
 z-notes.md
 
 # testing file
+/testing
 testing.http
 
 

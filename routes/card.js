@@ -16,7 +16,7 @@ router.route('/')
     .get(protectedRoute, adminValidator, getCards) // admin only route
     .post(protectedRoute, postCard)
 
-router.route('/:cardId')
+router.route('/:cardUuid')
     .get(protectedRoute, getCard)
     .put(protectedRoute, updateCard)
     .delete(protectedRoute, deleteCard)
